@@ -48,7 +48,7 @@ const LaunchRequestHandler = {
                 
                     const users = res.data;
                     
-                    speakOutput = users;
+                    // speakOutput = users;
                 
                     // for(user of users) {
                     //   console.log(`Got user with id: ${user.id}, name: ${user.name}`);
