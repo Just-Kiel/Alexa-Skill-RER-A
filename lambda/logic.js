@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-module.exports.fetchHourApi = async function fetchHourApi(destination) {
+module.exports.fetchHourApi = async function fetchHourApi() {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
     
     let dest = "";
