@@ -17,7 +17,7 @@ const LaunchRequestHandler = {
         // const slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
         // let filterData = slotValue.split(" ");
         
-        let slotValue = "";
+        let slotValue = "Marne-la-Vallee Chessy";
         
         let response = await logic.fetchHourApi(slotValue);
         // let response = await logic.fetchHourApi();
