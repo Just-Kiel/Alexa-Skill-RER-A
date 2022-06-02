@@ -62,7 +62,7 @@ const LaunchRequestHandler = {
         // speakOutput = "Something else"
         
         let response = await logic.fetchJokesApi();
-        speakOutput = response.value.joke;
+        speakOutput = response.result.schedules[0].code;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
