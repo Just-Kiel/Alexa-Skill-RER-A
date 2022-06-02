@@ -7,8 +7,8 @@ module.exports.fetchHourApi = async function fetchHourApi(destination) {
     
     if(destination === "Marne-la-Vallee Chessy" || destination === "Torcy"){
         dest = "R";
-    } else if(destination === "Saint-Germain-en-Laye"){
-        dest = "A";
+    // } else if(destination === "Saint-Germain-en-Laye"){
+        // dest = "A";
     } else {
         dest = "A%2BR";
     }
