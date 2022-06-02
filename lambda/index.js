@@ -18,6 +18,7 @@ const LaunchRequestHandler = {
                   
                   // A chunk of data has been received.
                   resp.on('data', (chunk) => {
+                      speakOutput = chunk;
                     data += chunk;
                   });
                 
