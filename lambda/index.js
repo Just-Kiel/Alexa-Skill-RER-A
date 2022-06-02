@@ -36,7 +36,7 @@ const HelloWorldIntentHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
     },
-    handle(handlerInput) {
+    async handle(handlerInput) {
         const speakOutput = 'Bonjour !';
 
         return handlerInput.responseBuilder
