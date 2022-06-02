@@ -59,7 +59,7 @@ const LaunchRequestHandler = {
         speakOutput = "Something else"
 
         return handlerInput.responseBuilder
-            .speak(speakOutput)
+            .speak(users)
             // .reprompt(speakOutput)
             .getResponse();
     }
