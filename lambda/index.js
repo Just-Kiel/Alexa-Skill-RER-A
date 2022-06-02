@@ -16,7 +16,6 @@ const LaunchRequestHandler = {
                 let data = '';
                 https.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R', (resp) => {
                   
-                
                   // A chunk of data has been received.
                   resp.on('data', (chunk) => {
                     data += chunk;
