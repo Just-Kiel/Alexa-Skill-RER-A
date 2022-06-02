@@ -15,10 +15,12 @@ const LaunchRequestHandler = {
                 const https = require('https');
                 let data = '';
                 https.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R', (resp) => {
+                    
+                    speakOutput = resp.result.schedules;
                   
                   // A chunk of data has been received.
                   resp.on('data', (chunk) => {
-                      speakOutput = chunk;
+                    //   speakOutput = chunk;
                     data += chunk;
                   });
                 
