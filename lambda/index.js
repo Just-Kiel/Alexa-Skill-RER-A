@@ -41,10 +41,10 @@ const HelloWorldIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
     },
     async handle(handlerInput) {
-        // const slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
+        const slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
         // let filterData = slotValue.split(" ");
         
-        let slotValue = "";
+        // let slotValue = "";
         
         let response = await logic.fetchHourApi(slotValue);
         // let response = await logic.fetchHourApi();
