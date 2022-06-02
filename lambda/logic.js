@@ -7,6 +7,8 @@ module.exports.fetchHourApi = async function fetchHourApi(destination) {
     
     if(destination === "Marne-la-Vallee Chessy"){
         dest = "R";
+    } else {
+        dest = "A+R";
     }
     
     let url = endpoint + '/v4/schedules/rers/A/Noisiel/' + dest;
