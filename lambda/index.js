@@ -40,7 +40,7 @@ const HelloWorldIntentHandler = {
         
         let slotValue = "";
         
-        let response = await logic.fetchHourApi(slotValue);
+        // let response = await logic.fetchHourApi(slotValue);
         // let response = await logic.fetchHourApi();
         
         // let speakOutput = handlerInput.requestEnvelope.request.intent.slots.destination.value;
