@@ -17,9 +17,9 @@ const LaunchRequestHandler = {
         let speakOutput = "Tu veux lancer la skill Prochain RER ? Dis Bonjour ou Aide !";
         
         const slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
-        let filterData = slotValue.split(" ");
+        // let filterData = slotValue.split(" ");
         
-        let response = await logic.fetchHourApi();
+        let response = await logic.fetchHourApi(slotValue);
         speakOutput = "Le prochain RER en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
 
         return handlerInput.responseBuilder
