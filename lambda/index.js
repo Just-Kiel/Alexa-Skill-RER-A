@@ -5,6 +5,7 @@
  * */
 const Alexa = require('ask-sdk-core');
 const https = require('https');
+const axios = require('axios');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -15,28 +16,45 @@ const LaunchRequestHandler = {
         
                 
                 // let data = '';
-                let data = [];
-                https.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R', res => {
+                // let data = [];
+                // https.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R', res => {
                     
-                    // Try to get something from the api
+                //     // Try to get something from the api
                     
-                    speakOutput = "Test";
+                //     speakOutput = "Test";
                   
-                  // A chunk of data has been received.
-                  res.on('data', (chunk) => {
-                    //   speakOutput = chunk;
-                    data += chunk;
-                  });
+                //   // A chunk of data has been received.
+                //   res.on('data', (chunk) => {
+                //     //   speakOutput = chunk;
+                //     data += chunk;
+                //   });
                 
-                  // The whole response has been received. Print out the result.
-                  res.on('end', () => {
-                    console.log(JSON.parse(data).explanation);
-                  });
+                //   // The whole response has been received. Print out the result.
+                //   res.on('end', () => {
+                //     console.log(JSON.parse(data).explanation);
+                //   });
                 
-                }).on("error", (err) => {
-                  console.log("Error: " + err.message);
-                });
+                // }).on("error", (err) => {
+                //   console.log("Error: " + err.message);
+                // });
         // speakOutput = data[0];
+        
+        
+                axios.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R')
+                  .then(res => {
+                    const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
+                    console.log('Status Code:', res.status);
+                    console.log('Date in Response header:', headerDate);
+                
+                    const users = res.data;
+                
+                    for(user of users) {
+                      console.log(`Got user with id: ${user.id}, name: ${user.name}`);
+                    }
+                  })
+                  .catch(err => {
+                    console.log('Error: ', err.message);
+                  });
         
         speakOutput = "Something else"
 
