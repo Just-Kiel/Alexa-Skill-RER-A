@@ -3,13 +3,13 @@ const axios = require('axios');
 module.exports.fetchHourApi = async function fetchHourApi() {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
     
-    let dest = "";
+    let dest = "A%2BR";
     
-    if(destination === "Marne-la-Vallee Chessy"){
-        dest = "R";
-    } else {
-        dest = "A%2BR";
-    }
+    // if(destination === "Marne-la-Vallee Chessy"){
+        // dest = "R";
+    // } else {
+        // dest = "A%2BR";
+    // }
     
     let url = endpoint + '/v4/schedules/rers/A/Noisiel/' + dest;
 
