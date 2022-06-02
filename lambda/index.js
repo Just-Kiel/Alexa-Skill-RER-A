@@ -14,7 +14,11 @@ const LaunchRequestHandler = {
     async handle(handlerInput) {
         let speakOutput = "Tu veux lancer la skill Prochain RER ? Dis Bonjour ou Aide !";
         
-        const slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
+        let slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
+        
+        if(slotValue === ""){
+            slotValue = "Saint-Germain-en-Laye";
+        }
         // let filterData = slotValue.split(" ");
         
         // let slotValue = "Saint-Germain-en-Laye";
