@@ -13,9 +13,9 @@ const LaunchRequestHandler = {
         const speakOutput = "Tu veux lancer la skill Prochain RER ? Dis Bonjour ou Aide !";
         
                 const https = require('https');
-        
+                let data = '';
                 https.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R', (resp) => {
-                  let data = '';
+                  
                 
                   // A chunk of data has been received.
                   resp.on('data', (chunk) => {
