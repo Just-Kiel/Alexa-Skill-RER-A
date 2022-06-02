@@ -18,9 +18,9 @@ const LaunchRequestHandler = {
         // let filterData = slotValue.split(" ");
         
         // let response = await logic.fetchHourApi(slotValue);
-        // let response = await logic.fetchHourApi();
+        let response = await logic.fetchHourApi();
 
-        // speakOutput = "Le prochain RER en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
+        speakOutput = "Le prochain RER en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
