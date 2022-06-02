@@ -48,9 +48,9 @@ const LaunchRequestHandler = {
                 
                     const users = res.data;
                 
-                    for(user of users) {
-                      console.log(`Got user with id: ${user.id}, name: ${user.name}`);
-                    }
+                    // for(user of users) {
+                    //   console.log(`Got user with id: ${user.id}, name: ${user.name}`);
+                    // }
                   })
                   .catch(err => {
                     console.log('Error: ', err.message);
