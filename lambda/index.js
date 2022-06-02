@@ -29,7 +29,7 @@ const LaunchRequestHandler = {
                 }).on("error", (err) => {
                   console.log("Error: " + err.message);
                 });
-        speakOutput = data.result.schedules;
+        speakOutput = data.result;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
