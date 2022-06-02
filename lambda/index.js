@@ -40,7 +40,7 @@ const HelpIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = 'You can say hello to me! How can I help?';
+        const speakOutput = "Je vais t'aider mais dis moi comment ?";
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -56,7 +56,7 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = 'Goodbye!';
+        const speakOutput = "Merci de m'avoir essayé !";
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
