@@ -16,6 +16,8 @@ const LaunchRequestHandler = {
                 let data = '';
                 https.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R', (resp) => {
                     
+                    // Try to get something from the api
+                    
                     speakOutput = resp.result.schedules;
                   
                   // A chunk of data has been received.
