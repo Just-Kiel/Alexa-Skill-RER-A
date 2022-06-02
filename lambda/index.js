@@ -15,20 +15,20 @@ const LaunchRequestHandler = {
         
                 
                 let data = '';
-                https.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R', (resp) => {
+                https.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R', res => {
                     
                     // Try to get something from the api
                     
                     speakOutput = "Test";
                   
                   // A chunk of data has been received.
-                  resp.on('data', (chunk) => {
+                  res.on('data', (chunk) => {
                     //   speakOutput = chunk;
                     data += chunk;
                   });
                 
                   // The whole response has been received. Print out the result.
-                  resp.on('end', () => {
+                  res.on('end', () => {
                     console.log(JSON.parse(data).explanation);
                   });
                 
