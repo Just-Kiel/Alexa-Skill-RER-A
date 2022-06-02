@@ -4,6 +4,7 @@
  * session persistence, api calls, and more.
  * */
 const Alexa = require('ask-sdk-core');
+const https = require('https');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -12,7 +13,7 @@ const LaunchRequestHandler = {
     handle(handlerInput) {
         let speakOutput = "Tu veux lancer la skill Prochain RER ? Dis Bonjour ou Aide !";
         
-                const https = require('https');
+                
                 let data = '';
                 https.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R', (resp) => {
                     
