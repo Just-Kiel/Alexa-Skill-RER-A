@@ -10,7 +10,6 @@ const logic = require('./logic');
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
-
     },
     async handle(handlerInput) {
         let speakOutput = "Tu veux lancer la skill Prochain RER ? Dis Bonjour ou Aide !";
@@ -33,7 +32,7 @@ const LaunchRequestHandler = {
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'getRER';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
     },
     async handle(handlerInput) {
         const speakOutput = 'Bonjour !';
