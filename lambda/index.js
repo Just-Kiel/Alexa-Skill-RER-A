@@ -9,8 +9,7 @@ const logic = require('./logic');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'getRER';
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
 
     },
     async handle(handlerInput) {
@@ -34,7 +33,7 @@ const LaunchRequestHandler = {
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
+            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'getRER';
     },
     async handle(handlerInput) {
         const speakOutput = 'Bonjour !';
