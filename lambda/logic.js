@@ -5,7 +5,7 @@ module.exports.fetchHourApi = async function fetchHourApi(destination) {
     
     let dest = "";
     
-    if(destination === "Marne-la-Vallee Chessy"){
+    if(destination === "Marne-la-Vallee Chessy" || destination === "Torcy"){
         dest = "R";
     } else {
         dest = "A%2BR";
