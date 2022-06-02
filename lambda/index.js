@@ -14,7 +14,7 @@ const LaunchRequestHandler = {
     async handle(handlerInput) {
         let speakOutput = "Tu veux lancer la skill Prochain RER ? Dis Bonjour ou Aide !";
         
-        let response = await logic.fetchJokesApi();
+        let response = await logic.fetchHourApi();
         speakOutput = response.result.schedules[0].message;
 
         return handlerInput.responseBuilder
