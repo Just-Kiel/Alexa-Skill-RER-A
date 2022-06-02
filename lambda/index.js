@@ -58,7 +58,7 @@ const LaunchRequestHandler = {
                     console.log('Error: ', err.message);
                   });
         
-        speakOutput = "Something else"
+        // speakOutput = "Something else"
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
