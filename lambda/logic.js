@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-module.exports.fetchJokesApi = async function fetchJokesApi() {
+module.exports.fetchHourApi = async function fetchHourApi() {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
     let url = endpoint + '/v4/schedules/rers/A/Noisiel/R';
 
