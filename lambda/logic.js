@@ -3,8 +3,10 @@ const axios = require('axios');
 module.exports.fetchHourApi = async function fetchHourApi(destination) {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
     
+    let dest = "";
+    
     if(destination === "Marne-la-Vallee Chessy"){
-        let dest = "R";
+        dest = "R";
     }
     
     let url = endpoint + '/v4/schedules/rers/A/Noisiel/' + dest;
