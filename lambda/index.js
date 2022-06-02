@@ -18,7 +18,7 @@ const LaunchRequestHandler = {
                     
                     // Try to get something from the api
                     
-                    speakOutput = resp.result.schedules;
+                    // speakOutput = resp.result.schedules;
                   
                   // A chunk of data has been received.
                   resp.on('data', (chunk) => {
