@@ -40,23 +40,23 @@ const LaunchRequestHandler = {
         // speakOutput = data[0];
         
         
-                axios.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R')
-                  .then(res => {
-                    const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
-                    console.log('Status Code:', res.status);
-                    console.log('Date in Response header:', headerDate);
+                // axios.get('https://api-ratp.pierre-grimaud.fr/v4/schedules/rers/A/Noisiel/R')
+                //   .then(res => {
+                //     const headerDate = res.headers && res.headers.date ? res.headers.date : 'no response date';
+                //     console.log('Status Code:', res.status);
+                //     console.log('Date in Response header:', headerDate);
                 
-                    const users = res.data;
+                //     const users = res.data;
                     
-                    // speakOutput = users;
+                //     // speakOutput = users;
                 
-                    // for(user of users) {
-                    //   console.log(`Got user with id: ${user.id}, name: ${user.name}`);
-                    // }
-                  })
-                  .catch(err => {
-                    console.log('Error: ', err.message);
-                  });
+                //     // for(user of users) {
+                //     //   console.log(`Got user with id: ${user.id}, name: ${user.name}`);
+                //     // }
+                //   })
+                //   .catch(err => {
+                //     console.log('Error: ', err.message);
+                //   });
         
         // speakOutput = "Something else"
 
