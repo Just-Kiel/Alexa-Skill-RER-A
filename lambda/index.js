@@ -42,6 +42,7 @@ const HelloWorldIntentHandler = {
         // let response = await logic.fetchHourApi();
         
         let speakOutput = handlerInput.requestEnvelope.request.intent.slots.destination.value;
+        speakOutput = "Test";
 
         // let speakOutput = "Le prochain RER en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
 
