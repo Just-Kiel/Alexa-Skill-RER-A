@@ -97,36 +97,24 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
 
         let dest = null;
 
-        destinationsA.forEach(element => {
-            if(element.includes(destination)){
-                dest = 'A';
-            }
-        });
+        // A indique vers Paris - R indique vers Marne la Vallee - A%2BR indique les 2 directions
 
-        destinationsR.forEach(element => {
+        // Les directions sont inversées pour la voie A (me demande pas pourquoi c'est une erreur de l'API)
+        destinationsA.forEach(element => {
             if(element.includes(destination)){
                 dest = 'R';
             }
         });
 
-        // if(destinationsA.includes(destination)){
-        //     dest = 'A';
-        // } else if(destinationsR.includes(destination)){
-        //     dest = 'R';
-        // } else {
-        //     dest = null;
-        // }
+        destinationsR.forEach(element => {
+            if(element.includes(destination)){
+                dest = 'A';
+            }
+        });
         
-        // A indique vers Paris - R indique vers Marne la Vallee - A%2BR indique les 2 directions
-        // let dest = 'A'; // vers Paris
-
         let depart = 'Noisiel';
         
         let url = endpoint + '/v4/schedules/rers/A/' + depart + '/' + dest;
-
-        // let config = {
-        //     timeout: 6500
-        // }
 
         try {
             let response = await axios.get(url, config);
