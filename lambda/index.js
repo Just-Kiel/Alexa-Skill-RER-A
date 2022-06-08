@@ -12,25 +12,28 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     async handle(handlerInput) {
-        // let speakOutput = "Tu veux lancer la skill Prochain RER ? Dis Bonjour ou Aide !";
-        
-        // let slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
-        
-        // if(slotValue === ""){
-        //     slotValue = "Saint-Germain-en-Laye";
-        // }
-        // let filterData = slotValue.split(" ");
-        
-        // let slotValue = "Saint-Germain-en-Laye";
-        
-        // let response = await logic.fetchHourApi(slotValue);
-        let response = await logic.fetchHourApi();
-
-        let speakOutput = "Hello, le prochain RER en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
+        let speakOutput = "Tu as démarré la skill pour connaitre le passage du prochain RER. Dis prochain passage ou spécifie ta demande pour connaitre l'horaire !";
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
-            // .reprompt(speakOutput)
+            .reprompt(speakOutput)
+            .getResponse();
+    }
+};
+
+const BasicIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'BasicIntent';
+    },
+    async handle(handlerInput) {
+        let response = await logic.fetchHourApi();
+
+        let speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
+        
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
             .getResponse();
     }
 };
@@ -41,10 +44,20 @@ const HelloWorldIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
     },
     async handle(handlerInput) {
-        const slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
+        // let slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
+        
+        // if(slotValue === ""){
+        //     slotValue = "Saint-Germain-en-Laye";
+        // }
         // let filterData = slotValue.split(" ");
         
-        // let slotValue = "";
+        // let slotValue = "Saint-Germain-en-Laye";
+        
+        // let response = await logic.fetchHourApi(slotValue);
+
+
+        const slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
+        // let filterData = slotValue.split(" ");
         
         let response = await logic.fetchHourApi(slotValue);
         // let response = await logic.fetchHourApi();
@@ -171,6 +184,7 @@ const ErrorHandler = {
 exports.handler = Alexa.SkillBuilders.custom()
     .addRequestHandlers(
         LaunchRequestHandler,
+        BasicIntentHandler,
         HelloWorldIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
