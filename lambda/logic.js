@@ -71,8 +71,6 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
 
         let destinationsA = responseDestination.data.result.destinations[0].name.split(" / ");
 
-        
-
         destinationsA = destinationsA.map(destin => {
             let temp = destin.split("-");
             destin = temp[0];
@@ -84,7 +82,7 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
             return destin.toLowerCase();
         });
 
-        return destinationsA[0];
+        return destination;
 
         let destinationsR = responseDestination.data.result.destinations[1].name.split(" / ");
 
