@@ -64,6 +64,8 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
         timeout: 6500
     }
 
+    destination = destination.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+
     try {
         let responseDestination = await axios.get(getDestination, config);
 
