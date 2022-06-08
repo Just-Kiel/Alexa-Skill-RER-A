@@ -69,9 +69,9 @@ const DirectionIntentHandler = {
 
         let response = await logic.fetchHourApiForSpecificDirection(slotValue);
 
-        let speakOutput = response;
+        // let speakOutput = response;
 
-        // let speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
+        let speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
         
         return handlerInput.responseBuilder
             .speak(speakOutput)

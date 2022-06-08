@@ -82,17 +82,40 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
             return destin.toLowerCase();
         });
 
-        return destination;
-
         let destinationsR = responseDestination.data.result.destinations[1].name.split(" / ");
 
-        if(destinationsA.includes(destination)){
-            dest = 'A';
-        } else if(destinationsR.includes(destination)){
-            dest = 'R';
-        } else {
-            dest = null;
-        }
+        destinationsR = destinationsR.map(destin => {
+            let temp = destin.split("-");
+            destin = temp[0];
+
+            for(let i = 1; i<temp.length; i++){
+                destin += ' ' + temp[i];
+            }
+            
+            return destin.toLowerCase();
+        });
+
+        let dest = null;
+
+        destinationsA.forEach(element => {
+            if(element.includes(destination)){
+                dest = 'A';
+            }
+        });
+
+        destinationsR.forEach(element => {
+            if(element.includes(destination)){
+                dest = 'R';
+            }
+        });
+
+        // if(destinationsA.includes(destination)){
+        //     dest = 'A';
+        // } else if(destinationsR.includes(destination)){
+        //     dest = 'R';
+        // } else {
+        //     dest = null;
+        // }
         
         // A indique vers Paris - R indique vers Marne la Vallee - A%2BR indique les 2 directions
         // let dest = 'A'; // vers Paris
