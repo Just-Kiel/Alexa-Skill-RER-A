@@ -69,6 +69,10 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
 
         let destinationsA = responseDestination.data.result.destinations[0].name.split(" / ");
 
+        destinationsA.forEach(destin => {
+            destin.toLowerCase();
+        });
+
         return destinationsA[0];
 
         let destinationsR = responseDestination.data.result.destinations[1].name.split(" / ");
