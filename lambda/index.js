@@ -59,6 +59,27 @@ const DepartIntentHandler = {
     }
 };
 
+const DirectionIntentHandler = {
+    canHandle(handlerInput) {
+        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
+        && Alexa.getIntentName(handlerInput.requestEnvelope) === 'DirectionIntent';
+    },
+    async handle(handlerInput) {
+        let slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value; // ici je récupère bien l'utterance dont j'ai besoin (la direction vers laquelle je veux aller)
+
+        let response = await logic.fetchHourApiForSpecificDirection(slotValue);
+
+        // let speakOutput = response;
+
+        let speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
+        
+        return handlerInput.responseBuilder
+            .speak(speakOutput)
+            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
+            .getResponse();
+    }
+};
+
 const HelloWorldIntentHandler = {
     canHandle(handlerInput) {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
@@ -207,6 +228,7 @@ exports.handler = Alexa.SkillBuilders.custom()
         LaunchRequestHandler,
         BasicIntentHandler,
         DepartIntentHandler,
+        DirectionIntentHandler,
         HelloWorldIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
