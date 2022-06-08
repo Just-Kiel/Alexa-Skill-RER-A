@@ -42,9 +42,11 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
 
     let depart = start[0];
 
-    for(let i = 1; i<start.length; i++){
-        depart.concat('+', start[i]);
-    }
+    depart.concat('+', start[1]);
+
+    // for(let i = 1; i<start.length; i++){
+    //     depart.concat('+', start[i]);
+    // }
     
     let url = endpoint + '/v4/schedules/rers/A/' + start + '/' + dest;
 
