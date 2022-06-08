@@ -37,6 +37,14 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
     // } else {
     //     dest = "A%2BR";
     // }
+
+    start = start.split(" ");
+
+    var depart = start[0];
+
+    for(let i = 1; i<start.length; i++){
+        depart += "+".start[i];
+    }
     
     let url = endpoint + '/v4/schedules/rers/A/' + start + '/' + dest;
 
@@ -45,8 +53,9 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
     }
 
     try {
-        let response = await axios.get(url, config);
-        return  response.data;
+        // let response = await axios.get(url, config);
+        // return  response.data;
+        return  depart;
     } catch (error) {
         console.log('ERROR', error);
         return null;

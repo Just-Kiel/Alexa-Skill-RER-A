@@ -44,11 +44,11 @@ const DepartIntentHandler = {
         && Alexa.getIntentName(handlerInput.requestEnvelope) === 'DepartIntent';
     },
     async handle(handlerInput) {
-        let slotValue = handlerInput.requestEnvelope.request.intent.slots.depart.value;
+        let slotValue = handlerInput.requestEnvelope.request.intent.slots.depart.value; // ici je récupère bien l'utterance dont j'ai besoin (le départ duquel je veux être)
 
-        // let response = await logic.fetchHourApiForSpecificDeparture();
+        let response = await logic.fetchHourApiForSpecificDeparture(slotValue);
 
-        let speakOutput = slotValue;
+        let speakOutput = response;
 
         // let speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
         
