@@ -62,41 +62,43 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
     
     try {
         let responseDestination = await axios.get(getDestination, config);
+
+        let destinationsA = responseDestination.data.result.destinations[0].name.split(" / ");
+
+        return destinationsA[0];
+
+        let destinationsR = responseDestination.data.result.destinations[1].name.split(" / ");
+
+        if(destinationsA.includes(destination)){
+            dest = 'A';
+        } else if(destinationsR.includes(destination)){
+            dest = 'R';
+        } else {
+            dest = null;
+        }
+        
+        // A indique vers Paris - R indique vers Marne la Vallee - A%2BR indique les 2 directions
+        // let dest = 'A'; // vers Paris
+
+        let depart = 'Noisiel';
+        
+        let url = endpoint + '/v4/schedules/rers/A/' + depart + '/' + dest;
+
+        let config = {
+            timeout: 6500
+        }
+
+        try {
+            let response = await axios.get(url, config);
+            return  response.data;
+        } catch (error) {
+            console.log('ERROR', error);
+            return null;
+        }
     } catch (error) {
         console.log('ERROR', error);
         return null;
     }
 
-    let destinationsA = responseDestination.data.result.destinations[0].name.split(" / ");
-
-    return destinationsA[0];
-
-    let destinationsR = responseDestination.data.result.destinations[1].name.split(" / ");
-
-    if(destinationsA.includes(destination)){
-        dest = 'A';
-    } else if(destinationsR.includes(destination)){
-        dest = 'R';
-    } else {
-        dest = null;
-    }
     
-    // A indique vers Paris - R indique vers Marne la Vallee - A%2BR indique les 2 directions
-    // let dest = 'A'; // vers Paris
-
-    let depart = 'Noisiel';
-    
-    let url = endpoint + '/v4/schedules/rers/A/' + depart + '/' + dest;
-
-    let config = {
-        timeout: 6500
-    }
-
-    try {
-        let response = await axios.get(url, config);
-        return  response.data;
-    } catch (error) {
-        console.log('ERROR', error);
-        return null;
-    }
 }
