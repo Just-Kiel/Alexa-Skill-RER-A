@@ -12,7 +12,7 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     async handle(handlerInput) {
-        let speakOutput = "Tu veux lancer la skill Prochain RER ? Dis Bonjour ou Aide !";
+        // let speakOutput = "Tu veux lancer la skill Prochain RER ? Dis Bonjour ou Aide !";
         
         // let slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
         
@@ -26,7 +26,7 @@ const LaunchRequestHandler = {
         // let response = await logic.fetchHourApi(slotValue);
         let response = await logic.fetchHourApi();
 
-        // speakOutput = "Hello, le prochain RER en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
+        let speakOutput = "Hello, le prochain RER en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
