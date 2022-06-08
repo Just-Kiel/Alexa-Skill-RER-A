@@ -40,7 +40,7 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
 
     start = start.split(" ");
 
-    let depart = start[1];
+    let depart = start.length;
 
     // for(let i = 1; i<start.length; i++){
     //     depart.concat('+', start[i]);
