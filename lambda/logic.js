@@ -60,6 +60,10 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
 
     let getDestination = endpoint + '/v4/destinations/rers/A';
     
+    let config = {
+        timeout: 6500
+    }
+
     try {
         let responseDestination = await axios.get(getDestination, config);
 
@@ -84,9 +88,9 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
         
         let url = endpoint + '/v4/schedules/rers/A/' + depart + '/' + dest;
 
-        let config = {
-            timeout: 6500
-        }
+        // let config = {
+        //     timeout: 6500
+        // }
 
         try {
             let response = await axios.get(url, config);
