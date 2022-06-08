@@ -1,17 +1,17 @@
 const axios = require('axios');
 
-module.exports.fetchHourApi = async function fetchHourApi(destination) {
+module.exports.fetchHourApi = async function fetchHourApi() {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
     
-    let dest = "";
+    let dest = 'A';
     
-    if(destination === "Marne-la-Vallee Chessy" || destination === "Torcy"){
-        dest = "R";
-    } else if(destination === "Saint-Germain-en-Laye"){
-        dest = "A";
-    } else {
-        dest = "A%2BR";
-    }
+    // if(destination === "Marne-la-Vallee Chessy" || destination === "Torcy"){
+    //     dest = "R";
+    // } else if(destination === "Saint-Germain-en-Laye"){
+    //     dest = "A";
+    // } else {
+    //     dest = "A%2BR";
+    // }
     
     let url = endpoint + '/v4/schedules/rers/A/Noisiel/' + dest;
 

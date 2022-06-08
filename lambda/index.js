@@ -14,19 +14,19 @@ const LaunchRequestHandler = {
     async handle(handlerInput) {
         let speakOutput = "Tu veux lancer la skill Prochain RER ? Dis Bonjour ou Aide !";
         
-        let slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
+        // let slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
         
-        if(slotValue === ""){
-            slotValue = "Saint-Germain-en-Laye";
-        }
+        // if(slotValue === ""){
+        //     slotValue = "Saint-Germain-en-Laye";
+        // }
         // let filterData = slotValue.split(" ");
         
         // let slotValue = "Saint-Germain-en-Laye";
         
-        let response = await logic.fetchHourApi(slotValue);
-        // let response = await logic.fetchHourApi();
+        // let response = await logic.fetchHourApi(slotValue);
+        let response = await logic.fetchHourApi();
 
-        speakOutput = "Hello, le prochain RER en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
+        // speakOutput = "Hello, le prochain RER en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
