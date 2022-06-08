@@ -38,26 +38,24 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
     //     dest = "A%2BR";
     // }
 
+    // Permet d'avoir un format propre de station
     start = start.split(" ");
 
     let depart = start[0];
-
-    // depart += start[1];
 
     for(let i = 1; i<start.length; i++){
         depart += '+' + start[i];
     }
     
-    let url = endpoint + '/v4/schedules/rers/A/' + start + '/' + dest;
+    let url = endpoint + '/v4/schedules/rers/A/' + depart + '/' + dest;
 
     let config = {
         timeout: 6500
     }
 
     try {
-        // let response = await axios.get(url, config);
-        // return  response.data;
-        return depart;
+        let response = await axios.get(url, config);
+        return  response.data;
     } catch (error) {
         console.log('ERROR', error);
         return null;
