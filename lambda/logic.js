@@ -40,7 +40,7 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
 
     start = start.split(" ");
 
-    var depart = start[0];
+    let depart = start[0];
 
     for(let i = 1; i<start.length; i++){
         depart += "+".start[i];
@@ -55,7 +55,7 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
     try {
         // let response = await axios.get(url, config);
         // return  response.data;
-        return  depart;
+        return depart;
     } catch (error) {
         console.log('ERROR', error);
         return null;
