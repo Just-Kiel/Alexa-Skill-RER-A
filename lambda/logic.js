@@ -1,6 +1,9 @@
 const axios = require('axios');
 
 // Fonction par défaut : Départ de Noisiel sur le RER A, prochain passage en direction de Paris
+
+// TODO Ajouter le fait que si le train est à l'approche ou à quai, je veux le suivant (Train à l'approche - Train à quai)
+
 module.exports.fetchHourApi = async function fetchHourApi() {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
     
@@ -64,21 +67,24 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
         timeout: 6500
     }
 
+    // J'enleve les accents pour pouvoir comparer de manière propre
     destination = destination.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
 
     try {
         let responseDestination = await axios.get(getDestination, config);
 
+        // Recupération des destinations dans un sens (nommé sens A mais en fait sens R car le monsieur de l'API a fait n'importe quoi)
         let destinationsA = responseDestination.data.result.destinations[0].name.split(" / ");
 
         destinationsA = destinationsA.map(destin => {
             let temp = destin.split("-");
-            destin = temp[0];
 
-            for(let i = 1; i<temp.length; i++){
-                destin += ' ' + temp[i];
-            }
+            destin = temp.reduce(
+                (previousValue, currentValue, index) => 
+                index!=0 ? previousValue+" "+currentValue : currentValue
+            );
             
+            // Format minuscule sans tiret et avec des espaces
             return destin.toLowerCase();
         });
 
@@ -86,11 +92,10 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
 
         destinationsR = destinationsR.map(destin => {
             let temp = destin.split("-");
-            destin = temp[0];
-
-            for(let i = 1; i<temp.length; i++){
-                destin += ' ' + temp[i];
-            }
+            destin  = temp.reduce(
+                (previousValue, currentValue, index) => 
+                index!=0 ? previousValue+" "+currentValue : currentValue
+            );
             
             return destin.toLowerCase();
         });
