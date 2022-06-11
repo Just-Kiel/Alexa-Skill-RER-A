@@ -31,11 +31,13 @@ const BasicIntentHandler = {
 
         // Check le premier RER qui n'est pas à l'approche ou à quai
         let result = response.result.schedules.find(x => x.message !=  "Train à l'approche" && x.message != "Train à quai");
+        
+        let speakOutput;
 
         if(result == undefined){
-            let speakOutput = "Hello, je n'ai pas trouvé de RER pour toi.";
+            speakOutput = "Hello, je n'ai pas trouvé de RER pour toi.";
         } else {
-            let speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + result.destination + " passe à " + result.message;
+            speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + result.destination + " passe à " + result.message;
         }
         
         return handlerInput.responseBuilder
