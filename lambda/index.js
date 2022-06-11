@@ -31,7 +31,7 @@ const BasicIntentHandler = {
 
         // Check le premier RER qui n'est pas à l'approche ou à quai
         let result = response.result.schedules.find(x => x.message !=  "Train à l'approche" && x.message != "Train à quai");
-        
+
         let speakOutput;
 
         if(result == undefined){
@@ -57,7 +57,16 @@ const DepartIntentHandler = {
 
         let response = await logic.fetchHourApiForSpecificDeparture(slotValue);
 
-        let speakOutput = "Hello, le prochain RER depuis " + slotValue + " en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
+        // Check le premier RER qui n'est pas à l'approche ou à quai
+        let result = response.result.schedules.find(x => x.message !=  "Train à l'approche" && x.message != "Train à quai");
+
+        let speakOutput;
+
+        if(result == undefined){
+            speakOutput = "Hello, je n'ai pas trouvé de RER pour toi.";
+        } else {
+            speakOutput = "Hello, le prochain RER depuis " + slotValue + " en direction de " + result.destination + " passe à " + result.message;
+        }
         
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -76,7 +85,16 @@ const DirectionIntentHandler = {
 
         let response = await logic.fetchHourApiForSpecificDirection(slotValue);
 
-        let speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
+        // Check le premier RER qui n'est pas à l'approche ou à quai
+        let result = response.result.schedules.find(x => x.message !=  "Train à l'approche" && x.message != "Train à quai");
+
+        let speakOutput;
+
+        if(result == undefined){
+            speakOutput = "Hello, je n'ai pas trouvé de RER pour toi.";
+        } else {
+            speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + result.destination + " passe à " + result.message;
+        }
         
         return handlerInput.responseBuilder
             .speak(speakOutput)

@@ -1,9 +1,6 @@
 const axios = require('axios');
 
 // Fonction par défaut : Départ de Noisiel sur le RER A, prochain passage en direction de Paris
-
-// TODO Ajouter le fait que si le train est à l'approche ou à quai, je veux le suivant (Train à l'approche - Train à quai)
-
 module.exports.fetchHourApi = async function fetchHourApi() {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
     
