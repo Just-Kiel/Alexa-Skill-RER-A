@@ -33,11 +33,11 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
     // Permet d'avoir un format propre de station
     start = start.split(" ");
 
-    let depart = start[0];
-
-    for(let i = 1; i<start.length; i++){
-        depart += '+' + start[i];
-    }
+    // Version jolie pour réduire avec un if ternenary
+    let depart = start.reduce(
+        (previousValue, currentValue, index) => 
+        index!=0 ? previousValue+"+"+currentValue : currentValue
+    );
     
     let url = endpoint + '/v4/schedules/rers/A/' + depart + '/' + dest;
 
@@ -54,7 +54,7 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
     }
 }
 
-// TODO Fonction + évoluée : pouvoir set la direction (arrivée uniquement valable)
+// Fonction + évoluée : pouvoir set la direction (arrivée uniquement valable)
 module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiForSpecificDirection(destination) {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
 
@@ -126,7 +126,5 @@ module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiFor
     } catch (error) {
         console.log('ERROR', error);
         return null;
-    }
-
-    
+    }    
 }

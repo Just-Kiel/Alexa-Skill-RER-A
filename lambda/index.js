@@ -69,46 +69,8 @@ const DirectionIntentHandler = {
 
         let response = await logic.fetchHourApiForSpecificDirection(slotValue);
 
-        // let speakOutput = response;
-
         let speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
         
-        return handlerInput.responseBuilder
-            .speak(speakOutput)
-            //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
-            .getResponse();
-    }
-};
-
-const HelloWorldIntentHandler = {
-    canHandle(handlerInput) {
-        return Alexa.getRequestType(handlerInput.requestEnvelope) === 'IntentRequest'
-            && Alexa.getIntentName(handlerInput.requestEnvelope) === 'HelloWorldIntent';
-    },
-    async handle(handlerInput) {
-        // let slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
-        
-        // if(slotValue === ""){
-        //     slotValue = "Saint-Germain-en-Laye";
-        // }
-        // let filterData = slotValue.split(" ");
-        
-        // let slotValue = "Saint-Germain-en-Laye";
-        
-        // let response = await logic.fetchHourApi(slotValue);
-
-
-        const slotValue = handlerInput.requestEnvelope.request.intent.slots.destination.value;
-        // let filterData = slotValue.split(" ");
-        
-        let response = await logic.fetchHourApi(slotValue);
-        // let response = await logic.fetchHourApi();
-        
-        // let speakOutput = handlerInput.requestEnvelope.request.intent.slots.destination.value;
-        // let speakOutput = "Test";
-
-        let speakOutput = "Le prochain RER en direction de " + response.result.schedules[0].destination + " passe à " + response.result.schedules[0].message;
-
         return handlerInput.responseBuilder
             .speak(speakOutput)
             //.reprompt('add a reprompt if you want to keep the session open for the user to respond')
@@ -229,7 +191,6 @@ exports.handler = Alexa.SkillBuilders.custom()
         BasicIntentHandler,
         DepartIntentHandler,
         DirectionIntentHandler,
-        HelloWorldIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         FallbackIntentHandler,
