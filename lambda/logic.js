@@ -51,36 +51,38 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
 
         stations = await axios.get(urlOfDest, config);
         stations = stations.data.result.stations;
-    } catch (error) {
-        console.log('ERROR', error);
-        return null;
-    }
+    
+        let count = 2;
 
-    let count = 2;
+        let charIndex = 0;
 
-    let charIndex = 0;
-
-    while (count > 1) {
-        count = 0;
-        for (let index = 0; index < stations.length; index++) {
-            if(depart.charAt(charIndex) =! stations[index].slug.charAt(charIndex)){
-                // if different on le sort des stations
-                stations.splice(index, 1); 
-                index--;
-            } else {
-                count++;
+        while (count > 1) {
+            count = 0;
+            for (let index = 0; index < stations.length; index++) {
+                if(depart.charAt(charIndex) =! stations[index].slug.charAt(charIndex)){
+                    // if different on le sort des stations
+                    stations.splice(index, 1); 
+                    index--;
+                } else {
+                    count++;
+                }
             }
+
+            charIndex++;
         }
 
-        charIndex++;
-    }
-    
+        return stations[0].slug;
+        
+        let url = endpoint + '/v4/schedules/rers/A/' + stations[0].slug + '/' + dest;
 
-    let url = endpoint + '/v4/schedules/rers/A/' + stations[0].slug + '/' + dest;
+        try {
+            let response = await axios.get(url, config);
+            return  response.data;
+        } catch (error) {
+            console.log('ERROR', error);
+            return null;
+        }
 
-    try {
-        let response = await axios.get(url, config);
-        return  response.data;
     } catch (error) {
         console.log('ERROR', error);
         return null;

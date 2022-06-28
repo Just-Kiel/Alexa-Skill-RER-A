@@ -58,15 +58,17 @@ const DepartIntentHandler = {
         let response = await logic.fetchHourApiForSpecificDeparture(slotValue);
 
         // Check le premier RER qui n'est pas à l'approche ou à quai
-        let result = response.result.schedules.find(x => x.message !=  "Train à l'approche" && x.message != "Train à quai");
+        // let result = response.result.schedules.find(x => x.message !=  "Train à l'approche" && x.message != "Train à quai");
 
         let speakOutput;
 
-        if(result == undefined){
-            speakOutput = "Hello, je n'ai pas trouvé de RER pour toi.";
-        } else {
-            speakOutput = "Hello, le prochain RER depuis " + slotValue + " en direction de " + result.destination + " passe à " + result.message;
-        }
+        // if(result == undefined){
+        //     speakOutput = "Hello, je n'ai pas trouvé de RER pour toi.";
+        // } else {
+        //     speakOutput = "Hello, le prochain RER depuis " + slotValue + " en direction de " + result.destination + " passe à " + result.message;
+        // }
+
+        speakOutput = response;
         
         return handlerInput.responseBuilder
             .speak(speakOutput)
