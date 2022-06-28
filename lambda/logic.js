@@ -59,7 +59,7 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
         while (count > 1) {
             count = 0;
             for (let index = 0; index < stations.length; index++) {
-                if(depart.charAt(charIndex) =! stations[index].slug.charAt(charIndex)){
+                if(depart.charAt(charIndex) != stations[index].slug.charAt(charIndex)){
                     // if different on le sort des stations
                     stations.splice(index, 1); 
                     index--;
@@ -70,8 +70,6 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
 
             charIndex++;
         }
-
-        return stations[0].slug;
         
         let url = endpoint + '/v4/schedules/rers/A/' + stations[0].slug + '/' + dest;
 
