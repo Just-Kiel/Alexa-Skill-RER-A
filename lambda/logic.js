@@ -24,6 +24,7 @@ module.exports.fetchHourApi = async function fetchHourApi() {
 
 
 // Fonction un peu évoluée : pouvoir set le départ
+// TODO souci de comparaison avec la speech recognition
 module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiForSpecificDeparture(start) {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
     
@@ -38,12 +39,44 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
         (previousValue, currentValue, index) => 
         index!=0 ? previousValue+"+"+currentValue : currentValue
     );
-    
-    let url = endpoint + '/v4/schedules/rers/A/' + depart + '/' + dest;
 
     let config = {
         timeout: 6500
     }
+
+    // TODO Get All stations on line A
+    let stations;
+    try {
+        let urlOfDest = 'https://api-ratp.pierre-grimaud.fr/v4/stations/rers/A';
+
+        stations = await axios.get(urlOfDest, config);
+        stations = stations.data.result.stations;
+    } catch (error) {
+        console.log('ERROR', error);
+        return null;
+    }
+
+    let count = 2;
+
+    let charIndex = 0;
+
+    while (count > 1) {
+        count = 0;
+        for (let index = 0; index < stations.length; index++) {
+            if(depart.charAt(charIndex) =! stations[index].slug.charAt(charIndex)){
+                // if different on le sort des stations
+                stations.splice(index, 1); 
+                index--;
+            } else {
+                count++;
+            }
+        }
+
+        charIndex++;
+    }
+    
+
+    let url = endpoint + '/v4/schedules/rers/A/' + stations[0].slug + '/' + dest;
 
     try {
         let response = await axios.get(url, config);
@@ -55,6 +88,7 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
 }
 
 // Fonction + évoluée : pouvoir set la direction (arrivée uniquement valable)
+// TODO pouvoir préciser une autre station que l'arrivée (avec des détections tout ça) devoir utiliser la requete pour avoir toutes les stations et ainsi savoir où je suis par rapport à où
 module.exports.fetchHourApiForSpecificDirection = async function fetchHourApiForSpecificDirection(destination) {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
 
