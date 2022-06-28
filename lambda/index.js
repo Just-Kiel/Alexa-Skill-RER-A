@@ -65,7 +65,7 @@ const DepartIntentHandler = {
         if(result == undefined){
             speakOutput = "Hello, je n'ai pas trouvé de RER pour toi.";
         } else {
-            speakOutput = "Hello, le prochain RER depuis " + slotValue + " en direction de " + result.destination + " passe à " + result.message;
+            speakOutput = "Hello, le prochain RER depuis " + response.result.depart + " en direction de " + result.destination + " passe à " + result.message;
         }
         
         return handlerInput.responseBuilder

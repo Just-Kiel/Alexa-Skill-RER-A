@@ -24,7 +24,7 @@ module.exports.fetchHourApi = async function fetchHourApi() {
 
 
 // Fonction un peu évoluée : pouvoir set le départ
-// TODO souci de comparaison avec la speech recognition
+// Comparaison avec la speech recognition
 module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiForSpecificDeparture(start) {
     let endpoint = 'https://api-ratp.pierre-grimaud.fr';
     
@@ -44,7 +44,7 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
         timeout: 6500
     }
 
-    // TODO Get All stations on line A
+    // Get All stations on line A
     let stations;
     try {
         let urlOfDest = 'https://api-ratp.pierre-grimaud.fr/v4/stations/rers/A';
@@ -75,6 +75,7 @@ module.exports.fetchHourApiForSpecificDeparture = async function fetchHourApiFor
 
         try {
             let response = await axios.get(url, config);
+            response.data.result.depart = stations[0].name;
             return  response.data;
         } catch (error) {
             console.log('ERROR', error);
