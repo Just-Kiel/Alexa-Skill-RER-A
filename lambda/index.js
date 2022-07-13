@@ -58,7 +58,8 @@ const DepartIntentHandler = {
         let response = await logic.fetchHourApiForSpecificDeparture(slotValue);
 
         // Check le premier RER qui n'est pas à l'approche ou à quai
-        let result = response.result.schedules.find(x => x.message !=  "Train à l'approche" && x.message != "Train à quai");
+        // TODO contains au lieu de ==
+        let result = response.result.schedules.find(x => !(x.message.includes("Train à l'approche")) && !(x.message.includes("Train à quai")));
 
         let speakOutput;
 
