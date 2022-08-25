@@ -7,7 +7,6 @@ const Alexa = require('ask-sdk-core');
 
 
 // TODO faire un clean et rangement propre
-// TODO ajouter une autre langue (genre de l'anglais US pour que ça puisse être déployé)
 // TODO récupérer la station la plus proche du RER A grâce à la localisation
 // TODO voir si on peut configurer des trucs au lancement de la skill et après c'est save
 const logic = require('./logic');
