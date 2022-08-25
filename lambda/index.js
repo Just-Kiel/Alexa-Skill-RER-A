@@ -5,6 +5,11 @@
  * */
 const Alexa = require('ask-sdk-core');
 
+
+// TODO faire un clean et rangement propre
+// TODO ajouter une autre langue (genre de l'anglais US pour que ça puisse être déployé)
+// TODO récupérer la station la plus proche du RER A grâce à la localisation
+// TODO voir si on peut configurer des trucs au lancement de la skill et après c'est save
 const logic = require('./logic');
 
 const LaunchRequestHandler = {
@@ -12,7 +17,13 @@ const LaunchRequestHandler = {
         return Alexa.getRequestType(handlerInput.requestEnvelope) === 'LaunchRequest';
     },
     async handle(handlerInput) {
+        const locale = handlerInput.requestEnvelope.request.locale
+
         let speakOutput = "Tu as démarré la skill pour connaitre le passage du prochain RER. Dis prochain passage ou spécifie ta demande pour connaitre l'horaire !";
+
+        if (locale === "en-US") {
+            speakOutput = "You started the skill to know the headway of the next RER. Say Next headway or specify your demand to know the time !";
+        }
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -32,12 +43,22 @@ const BasicIntentHandler = {
         // Check le premier RER qui n'est pas à l'approche ou à quai
         let result = response.result.schedules.find(x => x.message !=  "Train à l'approche" && x.message != "Train à quai");
 
+        const locale = handlerInput.requestEnvelope.request.locale
+
         let speakOutput;
 
         if(result == undefined){
             speakOutput = "Hello, je n'ai pas trouvé de RER pour toi.";
+
+            if (locale === "en-US") {
+                speakOutput = "Hello, I didn't find any RER for you.";                
+            }
         } else {
             speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + result.destination + " passe à " + result.message;
+
+            if (locale === "en-US") {
+                speakOutput = "Hello, next RER from Noisiel to " + result.destination + " will be at " + result.message;                
+            }
         }
         
         return handlerInput.responseBuilder
@@ -58,15 +79,25 @@ const DepartIntentHandler = {
         let response = await logic.fetchHourApiForSpecificDeparture(slotValue);
 
         // Check le premier RER qui n'est pas à l'approche ou à quai
-        // TODO contains au lieu de ==
+        // contains au lieu de ==
         let result = response.result.schedules.find(x => !(x.message.includes("Train à l'approche")) && !(x.message.includes("Train à quai")));
+
+        const locale = handlerInput.requestEnvelope.request.locale
 
         let speakOutput;
 
         if(result == undefined){
             speakOutput = "Hello, je n'ai pas trouvé de RER pour toi.";
+
+            if (locale === "en-US") {
+                speakOutput = "Hello, I didn't find any RER for you.";                
+            }
         } else {
             speakOutput = "Hello, le prochain RER depuis " + response.result.depart + " en direction de " + result.destination + " passe à " + result.message;
+
+            if (locale === "en-US") {
+                speakOutput = "Hello, next RER from " + response.result.depart + " to " + result.destination + " will be at " + result.message;                
+            }
         }
         
         return handlerInput.responseBuilder
@@ -89,12 +120,22 @@ const DirectionIntentHandler = {
         // Check le premier RER qui n'est pas à l'approche ou à quai
         let result = response.result.schedules.find(x => x.message !=  "Train à l'approche" && x.message != "Train à quai");
 
+        const locale = handlerInput.requestEnvelope.request.locale;
+
         let speakOutput;
 
         if(result == undefined){
             speakOutput = "Hello, je n'ai pas trouvé de RER pour toi.";
+
+            if (locale === "en-US") {
+                speakOutput = "Hello, I didn't find any RER for you.";                
+            }
         } else {
             speakOutput = "Hello, le prochain RER depuis Noisiel en direction de " + result.destination + " passe à " + result.message;
+
+            if (locale === "en-US") {
+                speakOutput = "Hello, next RER from Noisiel to " + result.destination + " will be at " + result.message;                
+            }
         }
         
         return handlerInput.responseBuilder
@@ -110,7 +151,14 @@ const HelpIntentHandler = {
             && Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.HelpIntent';
     },
     handle(handlerInput) {
-        const speakOutput = "Je vais t'aider mais dis moi comment ?";
+
+        const locale = handlerInput.requestEnvelope.request.locale;
+
+        let speakOutput = "Je vais t'aider mais dis moi comment ?";
+
+        if (locale === "en-US") {
+            speakOutput = "I can help you but tell me how ?";                
+        }
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
@@ -126,7 +174,14 @@ const CancelAndStopIntentHandler = {
                 || Alexa.getIntentName(handlerInput.requestEnvelope) === 'AMAZON.StopIntent');
     },
     handle(handlerInput) {
-        const speakOutput = "Merci de m'avoir essayé !";
+
+        const locale = handlerInput.requestEnvelope.request.locale;
+
+        let speakOutput = "Merci de m'avoir essayé !";
+
+        if (locale === "en-US") {
+            speakOutput = "Thanks for trying me !";                
+        }
 
         return handlerInput.responseBuilder
             .speak(speakOutput)
