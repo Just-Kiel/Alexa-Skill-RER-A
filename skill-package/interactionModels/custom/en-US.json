@@ -1,7 +1,7 @@
 {
   "interactionModel": {
     "languageModel": {
-      "invocationName": "prochain r. e. r.",
+      "invocationName": "next r. e. r.",
       "intents": [
         {
           "name": "AMAZON.CancelIntent",
@@ -23,7 +23,7 @@
           "name": "BasicIntent",
           "slots": [],
           "samples": [
-            "prochain passage"
+            "next headway"
           ]
         },
         {
@@ -35,7 +35,7 @@
             }
           ],
           "samples": [
-            "prochain passage depuis {depart}"
+            "next headway from {depart}"
           ]
         },
         {
@@ -47,12 +47,12 @@
             }
           ],
           "samples": [
-            "prochain passage vers {destination}"
+            "next headway to {destination}"
           ]
         }
       ],
       "types": []
     }
   },
-  "version": "11"
+  "version": "2"
 }

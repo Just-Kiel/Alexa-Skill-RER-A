@@ -1,5 +1,40 @@
 {
   "manifest": {
+    "publishingInformation": {
+      "locales": {
+        "en-US": {
+          "examplePhrases": [
+            "Alexa, next r. e. r.",
+            "next headway"
+          ],
+          "keywords": [],
+          "name": "prochain RER"
+        },
+        "fr-FR": {
+          "summary": "Savoir quand passe le prochain RER",
+          "examplePhrases": [
+            "Alexa, prochain r. e. r.",
+            "prochain passage depuis",
+            "prochain passage vers"
+          ],
+          "keywords": [],
+          "name": "prochain RER",
+          "description": "Savoir quand passe le prochain RER",
+          "smallIconUri": "file://assets/images/fr-FR_smallIconUri.png",
+          "largeIconUri": "file://assets/images/fr-FR_largeIconUri.png"
+        }
+      },
+      "automaticDistribution": {
+        "isActive": false
+      },
+      "isAvailableWorldwide": false,
+      "testingInstructions": "Sample Testing Instructions.",
+      "category": "DEVICE_TRACKING",
+      "distributionMode": "PUBLIC",
+      "distributionCountries": [
+        "FR"
+      ]
+    },
     "apis": {
       "custom": {
         "endpoint": {
@@ -7,14 +42,14 @@
         },
         "interfaces": [],
         "regions": {
-          "NA": {
-            "endpoint": {
-              "uri": "arn:aws:lambda:us-east-1:666678326873:function:56325742-3979-494d-b4ea-4ba8963bdb8e:Release_0"
-            }
-          },
           "EU": {
             "endpoint": {
               "uri": "arn:aws:lambda:eu-west-1:666678326873:function:56325742-3979-494d-b4ea-4ba8963bdb8e:Release_0"
+            }
+          },
+          "NA": {
+            "endpoint": {
+              "uri": "arn:aws:lambda:us-east-1:666678326873:function:56325742-3979-494d-b4ea-4ba8963bdb8e:Release_0"
             }
           },
           "FE": {
@@ -29,25 +64,26 @@
     "permissions": [
       {
         "name": "alexa:devices:all:address:country_and_postal_code:read"
+      },
+      {
+        "name": "alexa::devices:all:geolocation:read"
       }
     ],
-    "publishingInformation": {
-      "distributionCountries": [],
-      "isAvailableWorldwide": true,
+    "privacyAndCompliance": {
+      "allowsPurchases": false,
       "locales": {
+        "en-US": {},
         "fr-FR": {
-          "description": "Sample Full Description",
-          "examplePhrases": [
-            "Alexa ouvre le génie des salutations",
-            "bonjour",
-            "aide"
-          ],
-          "keywords": [],
-          "name": "prochain RER",
-          "summary": "Sample Short Description"
+          "privacyPolicyUrl": "https://oxnkeen.com/privacy-policy-alexa-skills/"
         }
       },
-      "testingInstructions": "Sample Testing Instructions."
+      "containsAds": false,
+      "isExportCompliant": true,
+      "isChildDirected": false,
+      "shoppingKit": {
+        "isShoppingActionsEnabled": false
+      },
+      "usesPersonalInfo": false
     }
   }
 }
